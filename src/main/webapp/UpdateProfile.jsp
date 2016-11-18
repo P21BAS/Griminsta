@@ -1,0 +1,69 @@
+<%-- 
+    Document   : UpdateProfile
+    Created on : 21-Oct-2016, 11:28:57
+    Author     : Brian
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>GrimInsta</title>
+        <link rel="stylesheet" type="text/css" href="Styles.css" />
+    </head>
+    <body>
+        <h1>GrimInsta ! </h1>
+        <h2>Edit Profile</h2>
+        
+         <nav id="nav">
+        <ul class="container">
+            <li><a href="/Instagrim">Home</a></li>
+            <li><a href="/Instagrim/Upload">Upload</a></li>
+                <%
+                    LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                    ProfileStore ps = (ProfileStore) session.getAttribute("profilepic");
+                    if (lg != null) {
+                        String UserName = lg.getUsername();
+                        if (lg.getlogedin()) {
+                %>
+            <li><a href="/Instagrim/Profile">User Profile</a></li>
+            <li><a href="/Instagrim/Images/SAMPLE">Sample Images</a></li>
+            <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+            <li><a href="/Instagrim/Logout" >Logout</a></li>
+                <% }
+                } else {
+                %>
+            <li><a href="/Instagrim/Register">Register</a></li>
+            <li><a href="/Instagrim/Login">Login</a></li>
+            <li><a href="/Instagrim/Images/SAMPLE">Sample Images</a></li>
+                <%}%>
+        </ul>
+    </nav>
+          <article class="container" id="top">
+            <h3>Profile Pic Upload</h3>
+            <form method="POST" enctype="multipart/form-data" action="Image">
+                File to upload: <input type="file" name="upfile"><br/>
+                <input type="hidden" name="check" value="true"> 
+                  <br/>
+                  <input type="radio" name="filter" value="grey"> Grey Filter<br>
+                  <input type="radio" name="filter" value="dark"> Dark Filter<br>
+                  <input type="radio" name="filter" value="green"> Green Filter<br>
+                  <input type="radio" name="filter" value="none"> No Filter<br>
+                <br/>
+                <input type="submit" value="Press"> to upload the file!
+            </form>
+                 <form method="POST"  action="UpdateProfile">
+                    <ul>
+                        <li>First Name <input type="text" name="firstname"></li>
+                        <li>Last Name <input type="text" name="lastname"></li>
+                        <li>Email <input type="email" name="email"></li>
+                    </ul>
+                <input type="submit" value="UpdateProfile"> 
+            </form>
+        </article>
+        <footer>
+        </footer>
+    </body>
+</html>
