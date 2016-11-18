@@ -97,7 +97,7 @@ public class PicModel {
             session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
                      session.execute(bsUpdateProfilePic.bind(picid, user));
                      session.close();
-            } //test
+            } 
 
         } catch (IOException ex) {
             System.out.println("Error --> " + ex);
